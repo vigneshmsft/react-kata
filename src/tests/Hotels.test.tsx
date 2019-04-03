@@ -1,16 +1,26 @@
 import Hotels from '../models/Hotels';
+import * as _ from 'lodash';
+import Hotel from '../models/Hotel';
+
+const hotelOne = {
+  name: 'hotelOne',
+  starRating: 5,
+  facilities: ['car park', 'gym', 'pool']
+};
+
+const hotelTwo = {
+  name: 'hotelTwo',
+  starRating: 4,
+  facilities: ['car park', 'pool']
+};
+const hotelThree = {
+  name: 'hotelTwo',
+  starRating: 4,
+  facilities: ['car park', 'pool']
+};
+const hotelList = [hotelOne, hotelTwo, hotelThree];
 
 describe('models.Hotels when given Hotel[]', () => {
-  let hotelList = [
-    {
-      name: 'hotelOne',
-      starRating: 5,
-      facilities: ['car park', 'gym', 'pool']
-    },
-    { name: 'hotelTwo', starRating: 4, facilities: ['car park', 'pool'] },
-    { name: 'hotelThree', starRating: 3, facilities: [''] }
-  ];
-  
   it('Hotels created successfully', () => {
     let hotels = new Hotels(hotelList);
     expect(hotels).not.toBe(null);
@@ -18,16 +28,28 @@ describe('models.Hotels when given Hotel[]', () => {
 
   it('all() returns original Hotel[]', () => {
     let hotels = new Hotels(hotelList);
-    expect(hotels.all().length).toBe(hotelList.length)
+    expect(hotels.all().length).toBe(hotelList.length);
   });
 });
 
 describe('models.Hotels withFacilities(facilities:string[])', () => {
+  let hotels = new Hotels(hotelList);
+  
   it('given known facility returns only hotels with those facilities', () => {
-    expect(false).toBe(true);
+    let hotelWithFacilities = hotels.withFacilities(['car park']);
+    
+    let hasCarPark = true;
+    _.forEach(hotelWithFacilities, hotel => hasCarPark && _.includes(hotel.facilities, 'car park'));
+    expect(hasCarPark).toBe(true);
+  });
+
+  it('given known facility check does not return hotel without those facilities', () => {
+    let hotelWithFacilities = hotels.withFacilities(['car park']);
+    
+    expect(_.includes(hotelWithFacilities, hotelThree)).toBe(false);
   });
 
   it('given unknown facility returns all available hotels', () => {
-    expect(false).toBe(true);
+    expect(hotels.withFacilities(['spa'])).toBe(hotels.all().length);
   });
 });

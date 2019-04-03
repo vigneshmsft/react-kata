@@ -10,4 +10,9 @@ export default class Hotels {
     public all(): Hotel[]{
         return this.hotels;
     }
+
+    public withFacilities(facilitiesRequired: string[]) : Hotel[]{
+        let hotelsWithFacility = new Array<Hotel>();
+        return hotelsWithFacility;
+    }
 }
