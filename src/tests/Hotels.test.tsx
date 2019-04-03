@@ -13,9 +13,9 @@ const hotelTwo = {
   facilities: ['car park', 'pool']
 };
 const hotelThree = {
-  name: 'hotelTwo',
-  starRating: 4,
-  facilities: ['car park', 'pool']
+  name: 'hotelThree',
+  starRating: 3,
+  facilities: ['pool']
 };
 const hotelList = [hotelOne, hotelTwo, hotelThree];
 
@@ -49,6 +49,6 @@ describe('models.Hotels withFacilities(facilities:string[])', () => {
   });
 
   it('given unknown facility returns all available hotels', () => {
-    expect(hotels.withFacilities(['spa'])).toBe(hotels.all().length);
+    expect(hotels.withFacilities(['spa'])).toBe(hotels.all());
   });
 });
