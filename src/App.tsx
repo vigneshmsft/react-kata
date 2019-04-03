@@ -22,13 +22,21 @@ class App extends React.Component<AppComponentProps, AppState> {
     this.viewModel.registerOnHotelResultChanged((hotels : Hotel[]) => this.setState({hotels}));
   }
 
+  private onFacilitiesFilterChange(filterText: string){
+    let facilitiesFilter = _.split(filterText, ',');
+    this.setState({facilitiesFilter})
+  }
+
   render() {
     const hotels = this.state.hotels;
+    const filter = this.state.facilitiesFilter;
     return (
       <div className="App">
         <header className="App-header">
           {_.map(hotels, this.renderHotel)}
-          <button onClick={() => this.viewModel.applyFacilitiesFilter(['car park'])}>Filter With Car Park</button>
+          <label>Filter Facilities</label>
+          <input type="text" value={filter} onChange={txt => this.onFacilitiesFilterChange(txt.target.value)}></input>
+          <button onClick={() => this.viewModel.applyFacilitiesFilter(filter)}>Apply Filter</button>
         </header>
       </div>
     );
