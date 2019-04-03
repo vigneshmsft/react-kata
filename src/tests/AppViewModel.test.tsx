@@ -1,5 +1,6 @@
 import AppViewModel from '../viewModels/AppViewModel';
 import HotelApiClient from '../services/HotelApiClient';
+import Hotels from '../models/Hotels';
 
 describe('viewModels.AppViewModel', () => {
   let hotelApiClient = new HotelApiClient();
@@ -13,6 +14,16 @@ describe('viewModels.AppViewModel', () => {
     let appViewModel = new AppViewModel(hotelApiClient);
     let hotels = await appViewModel.getAllHotels()
     expect(hotels.length).toEqual(4);
+  });
+
+  it('applyFacilitiesFilter() returns calls Hotels.withFacilities()',  async () => {
+    expect.assertions(1);
+    let appViewModel = new AppViewModel(hotelApiClient);
+
+    let allHotels = await appViewModel.getAllHotels();
+    var hotelsWithCarPark = appViewModel.applyFacilitiesFilter(['car park']);
+
+    expect(hotelsWithCarPark).toEqual(new Hotels(allHotels).withFacilities(['car park']));
   });
 
 });
