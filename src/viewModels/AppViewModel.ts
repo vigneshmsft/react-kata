@@ -1,6 +1,5 @@
-import Hotel from '../models/Hotel';
 import Hotels from '../models/Hotels';
-import HotelApiClient from '../services/hotelApiClient';
+import HotelApiClient from '../services/HotelApiClient';
 
 export default class AppViewModel {
   private readonly hotelApiClient: HotelApiClient;
@@ -10,7 +9,7 @@ export default class AppViewModel {
     this.hotelApiClient = hotelApiClient;
   }
 
-  public async getAllHotels() : PromiseLike<Hotel[]> {
+  public async getAllHotels() {
     if (this.hotels == undefined) {
       this.hotels = new Hotels(await this.hotelApiClient.getAllHotels());
     }
