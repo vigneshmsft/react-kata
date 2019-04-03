@@ -1,6 +1,6 @@
 import HotelApiClient from '../services/HotelApiClient';
 
-describe('HotelApiClient when given hotelList.json getAllHotels', () => {
+describe('services.HotelApiClient when given hotelList.json getAllHotels', () => {
   let hotelApiClient = new HotelApiClient();
 
   it('response is not null', async () => {
