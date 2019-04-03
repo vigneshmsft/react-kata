@@ -4,9 +4,11 @@ import HotelApiClient from '../services/HotelApiClient';
 export default class AppViewModel {
   private readonly hotelApiClient: HotelApiClient;
   private hotels: Hotels | undefined = undefined;
+  private onHotelsResultChanged: Function;
 
   constructor(hotelApiClient: HotelApiClient) {
     this.hotelApiClient = hotelApiClient;
+    this.onHotelsResultChanged = () => {};
   }
 
   public async getAllHotels() {
@@ -17,10 +19,12 @@ export default class AppViewModel {
   }
 
   public applyFacilitiesFilter(facilities: string[]){
-    return this.hotels!.withFacilities(facilities);
+    let hotels = this.hotels!.withFacilities(facilities);
+    this.onHotelsResultChanged(hotels);
+    return hotels;
   }
 
   public registerOnHotelResultChanged(onHotelsResultChanged: Function){
-
+    this.onHotelsResultChanged = onHotelsResultChanged;
   }
 }
