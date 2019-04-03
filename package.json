@@ -4,12 +4,16 @@
   "private": true,
   "dependencies": {
     "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.123",
     "@types/node": "^11.13.0",
     "@types/react": "^16.8.11",
     "@types/react-dom": "^16.8.3",
+    "@types/superagent": "^4.1.1",
+    "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
+    "superagent": "^5.0.2",
     "typescript": "^3.4.1"
   },
   "scripts": {
