@@ -3,7 +3,7 @@ import HotelApiClient from '../services/HotelApiClient';
 
 export default class AppViewModel {
   private readonly hotelApiClient: HotelApiClient;
-  private hotels: Hotels;
+  private hotels: Hotels | undefined = undefined;
 
   constructor(hotelApiClient: HotelApiClient) {
     this.hotelApiClient = hotelApiClient;
@@ -13,6 +13,6 @@ export default class AppViewModel {
     if (this.hotels == undefined) {
       this.hotels = new Hotels(await this.hotelApiClient.getAllHotels());
     }
-    return this.hotels.all();
+    return this.hotels!.all();
   }
 }
