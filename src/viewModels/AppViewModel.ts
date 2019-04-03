@@ -17,6 +17,6 @@ export default class AppViewModel {
   }
 
   public applyFacilitiesFilter(facilities: string[]){
-
+    return this.hotels!.withFacilities(facilities);
   }
 }
