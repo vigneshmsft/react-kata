@@ -4,12 +4,16 @@ import HotelApiClient from '../services/hotelApiClient';
 
 export default class AppViewModel {
   private readonly hotelApiClient: HotelApiClient;
+  private hotels: Hotels;
 
   constructor(hotelApiClient: HotelApiClient) {
     this.hotelApiClient = hotelApiClient;
   }
 
-  public getAllHotels() : PromiseLike<Hotel[]> {
-    return Promise.resolve([{name:'', starRating: 0, facilities:[]}]);
+  public async getAllHotels() : PromiseLike<Hotel[]> {
+    if (this.hotels == undefined) {
+      this.hotels = new Hotels(await this.hotelApiClient.getAllHotels());
+    }
+    return this.hotels.all();
   }
 }
