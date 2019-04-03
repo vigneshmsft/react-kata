@@ -24,6 +24,6 @@ export default class Hotels {
         hotelsWithFacility.push(hotel);
       }
     });
-    return hotelsWithFacility;
+    return _.isEmpty(hotelsWithFacility) ? this.hotels : hotelsWithFacility;
   }
 }
