@@ -27,6 +27,7 @@ class App extends React.Component<AppComponentProps, AppState> {
       <div className="App">
         <header className="App-header">
           {_.map(hotels, this.renderHotel)}
+          <button onClick={() => this.viewModel.applyFacilitiesFilter(['car park'])}>Filter With Car Park</button>
         </header>
       </div>
     );
