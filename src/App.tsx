@@ -19,6 +19,7 @@ class App extends React.Component<AppComponentProps, AppState> {
   private initialiseState() {
     this.state = {hotels:[], facilitiesFilter:[]}
     this.viewModel.getAllHotels().then(hotels => this.setState({hotels}));
+    this.viewModel.registerOnHotelResultChanged((hotels : Hotel[]) => this.setState({hotels}));
   }
 
   render() {
