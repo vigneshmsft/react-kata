@@ -6,7 +6,7 @@ function HotelLineItem(props: HotelComponentProps) {
   return (
     <div>
       <span>
-        {props.hotel.name} {props.hotel.starRating}
+        {props.hotel.name}, {props.hotel.starRating} star
       </span>
     </div>
   );
