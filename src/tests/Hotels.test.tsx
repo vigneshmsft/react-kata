@@ -1,6 +1,5 @@
 import Hotels from '../models/Hotels';
 import * as _ from 'lodash';
-import Hotel from '../models/Hotel';
 
 const hotelOne = {
   name: 'hotelOne',
