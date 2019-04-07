@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import AppComponentProps from './AppComponentProps';
 import AppState from './AppState';
 import AppViewModel from './viewModels/AppViewModel';
 import Hotel from './models/Hotel';
 import HotelLineItem from './components/HotelLineItem';
+import HotelFilter from './components/HotelFilter';
 import _ from 'lodash';
+import { HotelFilterType } from './models/HotelFilterType';
 
 class App extends React.Component<AppComponentProps, AppState> {
   
@@ -17,26 +19,23 @@ class App extends React.Component<AppComponentProps, AppState> {
   }
 
   private initialiseState() {
-    this.state = {hotels:[], facilitiesFilter:[]}
+    this.state = {hotels:[]}
     this.viewModel.getAllHotels().then(hotels => this.setState({hotels}));
     this.viewModel.registerOnHotelResultChanged((hotels : Hotel[]) => this.setState({hotels}));
   }
 
-  private onFacilitiesFilterChange(filterText: string){
-    let facilitiesFilter = _.split(filterText, ',');
-    this.setState({facilitiesFilter})
-  }
-
   render() {
     const hotels = this.state.hotels;
-    const filter = this.state.facilitiesFilter;
+    let selectedOptions = ['']
     return (
       <div className="App">
         <header className="App-header">
           {_.map(hotels, this.renderHotel)}
           <label>Filter Facilities</label>
-          <input type="text" value={filter} onChange={txt => this.onFacilitiesFilterChange(txt.target.value)}></input>
-          <button onClick={() => this.viewModel.applyFacilitiesFilter(filter)}>Apply Filter</button>
+          <HotelFilter filterType={HotelFilterType.Facilities} 
+          options={['car park', 'pool', 'gym']} 
+          onSelectedOptionsChanged={ (options) => selectedOptions  = options}/>
+          <button onClick={() => this.viewModel.applyFacilitiesFilter(selectedOptions)}>Apply Filter</button>
         </header>
       </div>
     );

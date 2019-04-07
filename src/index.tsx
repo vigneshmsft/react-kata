@@ -5,6 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import HotelApiClient from './services/HotelApiClient';
 import AppViewModel from './viewModels/AppViewModel';
+import { initializeIcons } from '@uifabric/icons';
+
+// Register icons and pull the fonts from the default SharePoint CDN:
+initializeIcons();
 
 const hotelsApiClient = new HotelApiClient();
 const appViewModel = new AppViewModel(hotelsApiClient);
